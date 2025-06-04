@@ -45,7 +45,7 @@ let feedbackColor = [0, 0, 0];
 let optionBoxes = [];
 
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(1280, 960); // 畫布放大兩倍
   video = createCapture(VIDEO, { flipped: true });
   video.size(640, 480);
   video.hide();
@@ -76,21 +76,16 @@ function setup() {
 }
 
 function draw() {
-  // 播放背景影片並鋪滿畫布
-  image(bgVideo, 0, 0, width, height);
-
-  // background(245); // ← 刪除或註解這一行
-
-  // 鏡頭畫面縮小顯示在右下角
-  let camW = 180, camH = 135;
-  let camX = width - camW - 24;
-  let camY = height - camH - 24;
-  stroke(200);
-  strokeWeight(4);
-  fill(255);
-  rect(camX - 4, camY - 4, camW + 8, camH + 8, 16); // 鏡頭外框
-  noStroke();
-  image(video, camX, camY, camW, camH);
+  scale(2.0); // 畫面放大兩倍
+  // 下面所有繪圖內容不用改
+  // 將視訊畫面放大200%並置中顯示
+  let scale = 2.0;
+  let videoW = video.width * scale;
+  let videoH = video.height * scale;
+  let videoX = (width - videoW) / 2;
+  let videoY = (height - videoH) / 2;
+  background(0); // 黑色背景
+  image(video, videoX, videoY, videoW, videoH);
 
   // 題目區塊置中
   let questionBoxW = 520, questionBoxH = 70;
