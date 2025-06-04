@@ -159,4 +159,17 @@
       fill(feedbackColor);
       text(feedback, width / 2, startY + boxH * 3 + 40);
     }
+
+    // 在 draw() 的最後加上這段，顯示所有 keypoints
+    if (hands.length > 0) {
+      let hand = hands[0];
+      if (hand.confidence > 0.1) {
+        for (let k of hand.keypoints) {
+          fill(0, 200, 255);
+          noStroke();
+          // 乘上 2.0 讓點位對齊放大後的畫面
+          circle(k.x * 2.0, k.y * 2.0, 10);
+        }
+      }
+    }
   }
